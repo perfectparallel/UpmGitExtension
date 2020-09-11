@@ -25,6 +25,7 @@ using Semver;
 #if UNITY_2019_3_OR_NEWER
 using Package = UnityEditor.PackageManager.UI.UpmPackage;
 using PackageInfo = UnityEditor.PackageManager.UI.UpmPackageVersion;
+
 #else
 using Package = UnityEditor.PackageManager.UI.Package;
 using PackageInfo = UnityEditor.PackageManager.UI.PackageInfo;
@@ -143,7 +144,6 @@ namespace Coffee.UpmGitExtension
     internal static class PackageExtensions
     {
 #if UNITY_2020_1_OR_NEWER
-
 #if UNITY_2020_2_OR_NEWER
         internal static PageManager PageManagerInstance => ServicesContainer.instance.Resolve<PageManager>();
 #else
@@ -247,7 +247,7 @@ namespace Coffee.UpmGitExtension
 
         internal static IEnumerable<UpmPackageVersion> GetGitPackageInfos()
         {
-            return GetGitPackages().Select(x=>x.installedVersion).Cast<UpmPackageVersion>();
+            return GetGitPackages().Select(x => x.installedVersion).Cast<UpmPackageVersion>();
         }
 
         internal static UpmPackageVersion GetInstalledVersion(this UpmPackage self)
