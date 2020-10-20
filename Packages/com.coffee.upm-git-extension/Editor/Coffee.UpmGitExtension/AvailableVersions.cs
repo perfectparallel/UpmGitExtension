@@ -17,9 +17,9 @@ namespace Coffee.UpmGitExtension
         public string refName = "";
         public string repoUrl = "";
 
-        public string refNameText => version == refName ? version : version + " - " + refName;
+        public string refNameText => version;
 
-        public string refNameVersion => version == refName ? version : version + "-" + refName;
+        public string refNameVersion => version;
 
         bool IEquatable<AvailableVersion>.Equals(AvailableVersion other)
         {
@@ -90,10 +90,11 @@ namespace Coffee.UpmGitExtension
         public static void AddVersions(IEnumerable<AvailableVersion> add)
         {
             if (add == null || !add.Any()) return;
-
+            
             var length = instance.versions.Length;
             var versions = instance.versions
                 .Union(add)
+                .Where(x => x.refNameVersion != "0.0.0")
                 .ToArray();
 
             if (versions.Length == length) return;
