@@ -90,11 +90,11 @@ namespace Coffee.UpmGitExtension
         public static void AddVersions(IEnumerable<AvailableVersion> add)
         {
             if (add == null || !add.Any()) return;
-            
+
             var length = instance.versions.Length;
             var versions = instance.versions
+                .Where(x => !x.refName.Contains("master"))
                 .Union(add)
-                .Where(x => x.refNameVersion != "0.0.0")
                 .ToArray();
 
             if (versions.Length == length) return;
